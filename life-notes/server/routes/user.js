@@ -22,21 +22,21 @@ router.post('/login', async (ctx) => {
             ctx.body = {
                 code: '800',
                 data,
-                msg: '登录成功！😄',
+                msg: '登录成功！',
                 token: token
             }
         } else {//不存在数据
             ctx.body = {
                 code: '805',
-                msg: '账号或密码错误！😭',
+                msg: '账号或密码错误！',
                 data: 'error'
             }
         }
     } catch (error) {
         ctx.body = {
             code: '8005',
-            data: error,
-            msg: '服务器异常！😮'
+            data: "",
+            msg: error
         }
     }
 })

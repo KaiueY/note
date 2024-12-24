@@ -12,10 +12,9 @@
         <div class="note-cell">
           <van-field label="图片上传">
             <template #input>
-              <van-uploader v-model="state.img" :after-read="afterRead" max-count="1" />
+              <van-uploader v-model="state.img" :after-read="afterRead" max-count="2" />
             </template>
           </van-field>
-  
         </div>
   
         <div class="note-cell">
@@ -75,9 +74,9 @@ import { showToast } from 'vant';
   const columns = [
     { text: '美食', value: '美食' },
     { text: '旅行', value: '旅行' },
-    { text: '恋爱', value: '恋爱' },
+    { text: '运动', value: '运动' },
     { text: '学习', value: '学习' },
-    { text: '吵架', value: '吵架' },
+    { text: '阅读', value: '阅读' },
   ]
   const onConfirm = ({selectedValues}) => {
     state.note_type = selectedValues[0]

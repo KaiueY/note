@@ -21,7 +21,7 @@ router.get('/findNoteListByType', jwt.verify(), async (ctx, next) => {
         else {//不存在数据
             ctx.body = {
                 code: '805',
-                msg: '，没有此类数据！😭',
+                msg: '，没有此类数据！',
                 data: 'error'
             }
         }
@@ -29,7 +29,7 @@ router.get('/findNoteListByType', jwt.verify(), async (ctx, next) => {
         ctx.body = {
             code: '806',
             data: error,
-            msg: '服务器异常！😮'
+            msg: '服务器异常！'
         }
     }
 })
@@ -51,7 +51,7 @@ router.get('/findNoteDetail', jwt.verify(), async (ctx, next) => {
         else {//不存在数据
             ctx.body = {
                 code: '805',
-                msg: '，没有这个数据！😭',
+                msg: '，没有这个数据！',
                 data: 'error'
             }
         }
@@ -59,7 +59,7 @@ router.get('/findNoteDetail', jwt.verify(), async (ctx, next) => {
         ctx.body = {
             code: '806',
             data: error,
-            msg: '服务器异常！😮'
+            msg: '服务器异常！'
         }
     }
 })
@@ -86,7 +86,7 @@ router.post('/note-publish', jwt.verify(), async (ctx, next) => {
             ctx.body = {
             code: '800',
             data: 'success',
-            msg: '发布成功！🎉'
+            msg: '发布成功！'
         }
 
         }
@@ -94,7 +94,7 @@ router.post('/note-publish', jwt.verify(), async (ctx, next) => {
             ctx.body = {
                 code: '800',
                 data: 'filed',
-                msg: '发布失败！🎉'
+                msg: '发布失败！'
             }
         }
         // console.log(result);
@@ -103,7 +103,7 @@ router.post('/note-publish', jwt.verify(), async (ctx, next) => {
         ctx.body = {
             code: '806',
             data: error,
-            msg: '服务器异常！😮'
+            msg: '服务器异常！'
         }
     }
 })
