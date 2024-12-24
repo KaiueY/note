@@ -12,7 +12,7 @@
             </header>
 
             <section>
-                <div class="note-item" v-for="item in noteClassList" :style="{ backgroundColor: item.bgColor }"
+                <div class="note-item" v-for="item in noteClassList" :key="item.title" :style="{ backgroundColor: item.bgColor }"
                     @click="toNoteList(item.title)">
                     <span class="title">{{ item.title }}</span>
                 </div>
@@ -21,7 +21,7 @@
         </div>
 
         <!-- menu -->
-        <Menu class="menu" v-model:isShowMenu="isShowMenu" :class="{ 'show': isShowMenu }" />
+        <Menu class="menu" v-model="isShowMenu" :class="{ 'show': isShowMenu }" />
     </div>
 </template>
 
