@@ -87,7 +87,7 @@ import { showToast } from 'vant';
   // 发布
   const publish = async() => {
     if (!state.content && !state.title && state.img.length === 0) {
-        showToast('对我的想念你还没想好~')
+        showToast('数据不能为空')
         return;
     }
     const res = await axios.post('/note-publish', {
