@@ -1,7 +1,7 @@
 <template>
     <div class="note-publish">
       <div class="editor">
-        <QuillEditor theme="snow" v-model:content="state.content" placeholder="请输入笔记内容" contentType="html" />
+        <QuillEditor theme="snow" v-model="state.content" placeholder="请输入笔记内容" contentType="html" />
       </div>
   
       <div class="note-wrap">
@@ -12,26 +12,25 @@
         <div class="note-cell">
           <van-field label="图片上传">
             <template #input>
-              <van-uploader v-model="state.img" :after-read="afterRead" max-count="1" />
+              <van-uploader v-model="state.img" :after-read="afterRead" max-count="2" />
             </template>
           </van-field>
-  
         </div>
   
         <div class="note-cell">
-          <div class="sort" @click="showPicker = true">
+          <div class="sort" @click="show = true">
             <span>分类</span>
             <span>{{state.note_type}} <van-icon name="arrow" /></span>
           </div>
   
           <van-popup 
-            v-model:show="showPicker" 
+            v-model="show" 
             round 
             position="bottom"
           >
             <van-picker 
               :columns="columns" 
-              @cancel="showPicker = false" 
+              @cancel="show = false" 
               @confirm="onConfirm" />
           </van-popup>
         </div>
@@ -71,17 +70,17 @@ import { showToast } from 'vant';
     console.log('图片读取到了', file);
   }
   
-  const showPicker = ref(false)
+  const show = ref(false)
   const columns = [
     { text: '美食', value: '美食' },
     { text: '旅行', value: '旅行' },
-    { text: '恋爱', value: '恋爱' },
+    { text: '运动', value: '运动' },
     { text: '学习', value: '学习' },
-    { text: '吵架', value: '吵架' },
+    { text: '阅读', value: '阅读' },
   ]
   const onConfirm = ({selectedValues}) => {
     state.note_type = selectedValues[0]
-    showPicker.value = false
+    show.value = false
   }
   
   // 发布
