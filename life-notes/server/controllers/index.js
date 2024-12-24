@@ -22,7 +22,7 @@ const allServices = {
 
             // 释放连接
             pool.releaseConnection(conn)
-
+            
             return Promise.resolve(rows)
         } catch (err) {
             return Promise.reject(err)

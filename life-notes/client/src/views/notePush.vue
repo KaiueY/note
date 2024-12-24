@@ -67,8 +67,46 @@ import { showToast } from 'vant';
     note_type: '美食'
   })
   
-  const afterRead = (file) => {
-    console.log('图片读取到了', file);
+  const afterRead = async (file) => {
+    const chunkSize = 1024 * 512; // 1MB per chunk
+    const chunks = [];
+    const totalChunks = Math.ceil(file.file.size / chunkSize);
+    
+    // 将文件分片
+    for (let i = 0; i < totalChunks; i++) {
+      const start = i * chunkSize;
+      const end = Math.min(start + chunkSize, file.file.size);
+      const chunk = file.file.slice(start, end);
+      chunks.push(chunk);
+    }
+
+    // 上传每个分片
+    for (let i = 0; i < chunks.length; i++) {
+      const formData = new FormData();
+      formData.append('chunk', chunks[i]);
+      formData.append('index', i);
+      formData.append('total', totalChunks);
+      formData.append('filename', file.file.name);
+
+      try {
+        await axios.post('/upload-chunk', formData);
+      } catch (error) {
+        showToast('上传失败');
+        return;
+      }
+    }
+
+    // 请求合并文件
+    const res = await axios.post('/merge-chunks', {
+      filename: file.file.name,
+      totalChunks
+    });
+
+    if (res.code === '800') {
+      state.img = [{
+        content: res.data.filePath
+      }];
+    }
   }
   
   const showPicker = ref(false)
@@ -87,7 +125,7 @@ import { showToast } from 'vant';
   // 发布
   const publish = async() => {
     if (!state.content && !state.title && state.img.length === 0) {
-        showToast('对我的想念你还没想好~')
+        showToast('请填写完整信息');
         return;
     }
     const res = await axios.post('/note-publish', {
