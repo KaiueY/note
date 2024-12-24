@@ -1,15 +1,10 @@
-require('dotenv').config();
-
-const { DATABASE, USERNAME, PASSWORD, PORT, HOST } = process.env;
-
 const config = {
-    database: {
-        DATABASE,
-        USERNAME,
-        PASSWORD,
-        PORT,
-        HOST
+    database:{
+        DATABASE:'noteBook',
+        USERNAME:'root',
+        PASSWORD:'root',
+        PORT:'3306',
+        HOST:'localhost'
     }
-};
-
-module.exports = config;
+}
+module.exports = config
